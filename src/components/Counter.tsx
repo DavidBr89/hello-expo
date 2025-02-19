@@ -2,12 +2,21 @@ import {
   Button,
   FlatList,
   GestureResponderEvent,
+  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
   View,
 } from "react-native";
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useReducer,
+  useRef,
+  useState,
+} from "react";
+import MyButton from "./MyButton";
 
 type UpdaterFunc = (value: number) => void;
 
@@ -28,9 +37,15 @@ interface CounterProps {
 const Counter = ({ setCounter, counter }: CounterProps) => {
   const [todos, setTodos] = useState<Todo[]>([]);
 
+  const listRef = useRef<FlatList>(null);
+
   const handlePress = (event: GestureResponderEvent) => {
     console.log(event.timeStamp);
     setCounter(counter + 1);
+
+    if (listRef.current) {
+      listRef.current.scrollToEnd();
+    }
   };
 
   useEffect(() => {
@@ -57,26 +72,37 @@ const Counter = ({ setCounter, counter }: CounterProps) => {
   }, []);
 
   return (
-    <View>
+    <View style={styles.container}>
       <Text>{counter}</Text>
 
       {/* {todos.map((todo) => (
         <Text key={todo.id}>{todo.title}</Text>
       ))} */}
 
-      <FlatList
-        data={todos}
-        renderItem={({ item }) => {
-          return <Text>{item.title}</Text>;
-        }}
-        keyExtractor={(item) => item.id.toString()}
-      />
-
-      <Button title="Klik mij" onPress={handlePress}></Button>
+      <View style={{ flex: 4 }}>
+        <FlatList
+          ref={listRef}
+          data={todos}
+          renderItem={({ item }) => {
+            return <Text>{item.title}</Text>;
+          }}
+          keyExtractor={(item) => item.id.toString()}
+        />
+      </View>
+      <View style={{ flex: 1, alignItems: "center" }}>
+        <MyButton style={{ backgroundColor: "yellow" }} onPress={handlePress}>
+          <Text>Counter button</Text>
+        </MyButton>
+        {/* <Button title="Klik mij" onPress={handlePress}></Button> */}
+      </View>
     </View>
   );
 };
 
 export default Counter;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
