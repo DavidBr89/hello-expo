@@ -11,6 +11,7 @@ import { useState } from "react";
 import Counter from "./src/components/Counter";
 import { NavigationContainer } from "@react-navigation/native";
 import StackNavigator from "./src/navigation/StackNavigator";
+import TabNavigator from "./src/navigation/TabNavigator";
 
 export default function App() {
   let title = "Mobile Les 1";
@@ -19,7 +20,8 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <StackNavigator />
+      <TabNavigator />
+      {/* <StackNavigator /> */}
     </NavigationContainer>
     // <SafeAreaView style={styles.container}>
     //   <Header title={title} />

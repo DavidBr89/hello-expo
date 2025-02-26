@@ -9,6 +9,11 @@ import {
 import React from "react";
 import MyButton from "../components/MyButton";
 import { useNavigation } from "@react-navigation/native";
+import {
+  CourseItem,
+  StackNavigatorParamsList,
+  StackNavProps,
+} from "../navigation/types";
 
 const courses = [
   {
@@ -29,13 +34,8 @@ const courses = [
   },
 ];
 
-interface CourseItem {
-  id: number;
-  name: string;
-}
-
 const HomeScreen = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavProps<"Home">["navigation"]>();
 
   const renderCourse = ({
     item,
@@ -45,7 +45,7 @@ const HomeScreen = () => {
     return (
       <MyButton
         onPress={() => {
-          navigation.navigate("Details", { course: item, index: index });
+          navigation.navigate("Details", { course: item });
         }}>
         <Text>{item.name}</Text>
       </MyButton>
