@@ -9,6 +9,8 @@ import {
 import Header from "./src/components/Header";
 import { useState } from "react";
 import Counter from "./src/components/Counter";
+import { NavigationContainer } from "@react-navigation/native";
+import StackNavigator from "./src/navigation/StackNavigator";
 
 export default function App() {
   let title = "Mobile Les 1";
@@ -16,12 +18,15 @@ export default function App() {
   const [counter, setCounter] = useState(0);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Header title={title} />
-      <Counter counter={counter} setCounter={setCounter} />
-      <Text>Hello Mobile!</Text>
-      <StatusBar style="auto" />
-    </SafeAreaView>
+    <NavigationContainer>
+      <StackNavigator />
+    </NavigationContainer>
+    // <SafeAreaView style={styles.container}>
+    //   <Header title={title} />
+    //   <Counter counter={counter} setCounter={setCounter} />
+    //   <Text>Hello Mobile!</Text>
+    //   <StatusBar style="auto" />
+    // </SafeAreaView>
   );
 }
 
