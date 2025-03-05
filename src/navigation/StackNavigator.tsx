@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import {
   createStackNavigator,
@@ -6,7 +6,11 @@ import {
 } from "@react-navigation/stack";
 import HomeScreen from "../screens/HomeScreen";
 import DetailsScreen from "../screens/DetailsScreen";
-import { StackNavigatorParamsList } from "./types";
+import { StackNavigatorParamsList, StackNavProps } from "./types";
+
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import AddCourseScreen from "../screens/AddCourseScreen";
 
 // const browserRouter = createBrowserRouter([
 //   {
@@ -26,6 +30,12 @@ const MyHeader = (props: StackHeaderProps) => {
 };
 
 const StackNavigator = () => {
+  const navigation = useNavigation<StackNavProps<"Home">["navigation"]>();
+
+  const handlePress = () => {
+    navigation.navigate("AddCourse");
+  };
+
   return (
     <Stack.Navigator
       screenOptions={{
@@ -39,6 +49,19 @@ const StackNavigator = () => {
         component={HomeScreen}
         options={{
           title: "Start",
+          headerRight: ({ tintColor }) => {
+            return (
+              <TouchableOpacity
+                style={{ marginRight: 8 }}
+                onPress={handlePress}>
+                <MaterialCommunityIcons
+                  color={tintColor}
+                  size={28}
+                  name="plus"
+                />
+              </TouchableOpacity>
+            );
+          },
         }}
       />
       <Stack.Screen
@@ -50,6 +73,7 @@ const StackNavigator = () => {
           }
         }
       />
+      <Stack.Screen name="AddCourse" component={AddCourseScreen} />
 
       {/* <Stack.Group screenOptions={{ headerShown: false }}>
         <Stack.Screen />

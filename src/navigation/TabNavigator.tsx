@@ -8,6 +8,7 @@ import SettingsScreen from "../screens/SettingsScreen";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import StackNavigator from "./StackNavigator";
+import DrawerNavigator from "./DrawerNavigator";
 
 const Tab = createBottomTabNavigator<TabNavigatorParamsList>();
 
@@ -24,8 +25,14 @@ const TabNavigator = () => {
           ),
         }}
       />
-      <Tab.Screen name="Info" component={InfoScreen} />
-      <Tab.Screen name="Settings" component={SettingsScreen} />
+      <Tab.Screen name="InfoTab" component={InfoScreen} />
+      <Tab.Screen
+        name="Settings"
+        component={DrawerNavigator}
+        options={{
+          headerShown: false,
+        }}
+      />
     </Tab.Navigator>
   );
 };
