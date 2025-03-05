@@ -13,7 +13,7 @@ export type StackNavigatorParamsList =  {
 }
 
 export type TabNavigatorParamsList = {
-    Home: undefined;
+    HomeStack: undefined;
     Info: undefined;
     Settings: undefined;
 }

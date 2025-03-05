@@ -7,6 +7,7 @@ import InfoScreen from "../screens/InfoScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import StackNavigator from "./StackNavigator";
 
 const Tab = createBottomTabNavigator<TabNavigatorParamsList>();
 
@@ -14,9 +15,10 @@ const TabNavigator = () => {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="Home"
-        component={HomeScreen}
+        name="HomeStack"
+        component={StackNavigator}
         options={{
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="home" color={color} size={size} />
           ),
